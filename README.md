@@ -1,38 +1,252 @@
-# Email Spam Classification (Week 3 – DEN DS Internship)
+# 📧 Email Spam Classification using Machine Learning
 
-Classifies messages as **Spam** or **Ham** using classic NLP + ML.
-Best model: **Linear SVM** with **TF–IDF (1–2 grams)**.
+A Machine Learning and Natural Language Processing (NLP) project that classifies email/SMS messages as **Spam** or **Ham (Not Spam)** using multiple classification algorithms. The project compares different models and selects the best-performing classifier based on evaluation metrics.
 
-##  Project Structure
-- `notebook/` – Final Jupyter notebook with end-to-end workflow
-- `results/` – Saved metrics and plots
+---
 
-## Dataset
-- Name: `spam.csv` (~5.5k messages; columns: `Category`, `Message`)
-- Source: Public SMS/Email spam dataset (Kaggle/UCI variants exist)
-- **Not included** in repo for size/license hygiene. 
+## 📌 Project Overview
 
-##  Tech Stack
-- Python, scikit-learn, NLTK
-- TF–IDF Vectorizer: `ngram_range=(1, 2)`, `lowercase=True`, `min_df=1`
-- Models tried: Multinomial NB, Logistic Regression, Linear SVM
+Spam detection is one of the most common applications of Natural Language Processing (NLP). This project builds a text classification model capable of automatically identifying whether a message is **Spam** or **Ham**.
 
-##  Results (hold-out test)
-| Model                  | Acc  | Prec(Spam) | Rec(Spam) | F1(Spam) |
-|------------------------|------|------------|-----------|----------|
-| Multinomial NB         | 0.971| 0.962      | 0.905     | 0.933    |
-| Logistic Regression    | 0.982| 0.977      | 0.934     | 0.955    |
-| **Linear SVM (Best)**  | 0.984| 0.981      | 0.934     | 0.957    |
+The workflow includes:
 
+- Data Cleaning & Preprocessing
+- Text Vectorization using TF-IDF
+- Model Training
+- Model Evaluation
+- Performance Comparison
+- Predictions on Unseen Messages
 
-##  How to Run
+---
+
+## 📂 Dataset
+
+- **Dataset Name:** `spam.csv`
+- **Total Records:** Approximately 5,500 messages
+
+### Dataset Columns
+
+| Column | Description |
+|----------|-------------|
+| Category | Target label (Spam or Ham) |
+| Message | Email/SMS text |
+
+---
+
+## 🛠 Technologies Used
+
+- Python
+- Jupyter Notebook
+- Pandas
+- NumPy
+- Matplotlib
+- Seaborn
+- NLTK
+- Scikit-learn
+
+---
+
+## 📚 Libraries Used
+
+```python
+pandas
+numpy
+matplotlib
+seaborn
+nltk
+scikit-learn
+```
+
+---
+
+# 📖 Project Workflow
+
+## 1️⃣ Data Cleaning & Preprocessing
+
+The following preprocessing steps were performed:
+
+- Converted text to lowercase
+- Removed punctuation
+- Removed numbers
+- Removed special characters
+- Tokenized text
+- Removed stopwords using NLTK
+- Applied Porter Stemmer
+- Rejoined cleaned words into sentences
+
+---
+
+## 2️⃣ Feature Engineering
+
+Text data was converted into numerical vectors using **TF-IDF Vectorizer**.
+
+### TF-IDF Parameters
+
+- lowercase = True
+- ngram_range = (1,2)
+- min_df = 1
+
+---
+
+## 3️⃣ Machine Learning Models
+
+The following models were trained and compared:
+
+- Multinomial Naive Bayes
+- Logistic Regression
+- Linear Support Vector Machine (SVM)
+
+---
+
+# 📊 Model Evaluation
+
+Evaluation metrics used:
+
+- Accuracy
+- Precision
+- Recall
+- F1-Score
+- Confusion Matrix
+
+---
+
+# 📈 Results
+
+| Model | Accuracy | Precision | Recall | F1-Score |
+|--------|----------|-----------|--------|----------|
+| Multinomial Naive Bayes | 97.1% | 96.2% | 90.5% | 93.3% |
+| Logistic Regression | 98.2% | 97.7% | 93.4% | 95.5% |
+| **Linear SVM** ⭐ | **98.4%** | **98.1%** | **93.4%** | **95.7%** |
+
+---
+
+# 🏆 Best Model
+
+**Linear Support Vector Machine (SVM)** achieved the highest overall performance.
+
+**Accuracy:** 98.4%
+
+**F1-Score:** 95.7%
+
+---
+
+# 🔍 Sample Predictions
+
+| Message | Prediction |
+|----------|------------|
+| Congratulations! You have won a $1000 Walmart gift card. Click here... | Spam |
+| Are we still meeting at 3pm today? | Ham |
+| URGENT: Your account is locked. Verify your details immediately. | Spam |
+| Ok, see you soon! | Ham |
+| WINNER! Free vacation to Bahamas... | Spam |
+
+---
+
+# 📊 Visualizations
+
+The project includes the following visualizations:
+
+- Spam vs Ham Class Distribution
+- Confusion Matrix Heatmap
+- Model Performance Comparison
+
+> Screenshots of these visualizations are available in the **images/** folder.
+
+---
+
+# 📁 Project Structure
+
+```
+Email-Spam-Classification/
+│
+├── data/
+│   └── spam.csv
+│
+├── notebooks/
+│   └── Email_Spam_Classification.ipynb
+│
+├── images/
+│   ├── spam_vs_ham.png
+│   └── confusion_matrix.png
+│
+├── reports/
+│   └── Email_Spam_Classification_Report.pdf
+│
+├── README.md
+├── requirements.txt
+├── LICENSE
+└── .gitignore
+```
+
+---
+
+# 🚀 How to Run
+
+### Clone the Repository
+
 ```bash
-# 1) create env
-python -m venv .venv && . .venv/Scripts/activate  # Windows
-# or: source .venv/bin/activate                   # macOS/Linux
+git clone https://github.com/yourusername/Email-Spam-Classification.git
+```
 
-pip install -r requirements.txt  # (generate this from your notebook)
+### Navigate to the Project
 
-# 2) place spam.csv in data/ 
-# 3) run notebook or scripts
-jupyter lab  # open notebook/spam_classification.ipynb
+```bash
+cd Email-Spam-Classification
+```
+
+### Install Dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+### Launch Jupyter Notebook
+
+```bash
+jupyter notebook
+```
+
+Open:
+
+```
+Email_Spam_Classification.ipynb
+```
+
+and run all cells.
+
+---
+
+# 💡 Future Improvements
+
+- Train on larger datasets
+- Use Lemmatization instead of Stemming
+- Experiment with Word Embeddings
+- Apply Deep Learning models (LSTM, GRU)
+- Fine-tune Transformer models such as BERT
+
+---
+
+# 👨‍💻 Author
+
+**Aleem Shoukat**
+
+Data Science Intern – Digital Empowerment Network (DEN)
+
+- Python
+- Machine Learning
+- Natural Language Processing (NLP)
+- Data Analytics
+
+---
+
+# 📜 Internship Information
+
+**Organization:** Digital Empowerment Network (DEN)
+
+**Internship:** Data Science Internship
+
+**Task:** Task 03 – Email Spam Classification
+
+---
+
+## ⭐ If you found this project helpful, consider giving it a star!
